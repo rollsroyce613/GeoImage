@@ -1,14 +1,5 @@
-function [DTS, fileCnt, indx] = importDTSData()
+function DTS = loadDTSData(fname, pathn, fileCnt, indx)
 %IMPORTDTSDATA Summary of this function goes here
-
-% import files
-[fname, pathn, indx] = uigetfile({'*.txt', 'Nzsensing data'; '*.xml', 'Silixa data'}, ...
-    'Please select files','MultiSelect','on');
-
-% convert to string of fname, in order to count and importdata
-fname = string(fname);
-pathn = string(pathn);
-[~, fileCnt] = size(fname);
 
 % Get temprature, time, start time of the trail
 if (indx == 1) % Nanzee Sensing
@@ -41,7 +32,10 @@ if (indx == 1) % Nanzee Sensing
     DTS.TMP = tTMP;
 
 elseif (indx == 2) % Silixa sensing
-    
+   
+else
+    fprintf("import files failed!");
+    DTS = null;
 end
 
 end
